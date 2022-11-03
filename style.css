@@ -25,4 +25,7 @@ body {
 
 .gameboard>div {
     background-color: blanchedalmond;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

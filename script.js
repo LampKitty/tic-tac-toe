@@ -1,4 +1,6 @@
-const cell = document.querySelectorAll('.gameboard>div');
+const cells = document.querySelectorAll('.gameboard>div');
+
+
 
 const gameBoard = (() => {
 let playField = 
@@ -19,3 +21,15 @@ const player = (name) => {
     }
 }
 
+cells.forEach(cell => cell.addEventListener('click', function() {
+   
+    if(cell.lastChild != null) {
+        return;
+    }
+
+    let cross = document.createElement('img');
+    cross.setAttribute('style','width: 100px; height: 100px;')
+    cross.src = 'img/cross.png';
+    cell.appendChild(cross);
+    
+}));
