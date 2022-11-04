@@ -12,13 +12,29 @@ const gameBoard = (() => {
     const populateArr = (cells, cell, sign) =>
         playField[Array.from(cells).indexOf(cell, 0)] = sign;
 
+    const isWinner = (sign) => {
+        if((playField[0] === sign & playField[1] === sign & playField[2] === sign)
+        ||(playField[3] === sign & playField[4] === sign & playField[5] === sign)
+        ||(playField[6] === sign & playField[7] === sign & playField[8] === sign)) {
+            console.log('winner');
+        }
+        else if ((playField[0] === sign & playField[3] === sign & playField[6] === sign)
+        ||(playField[1] === sign & playField[4] === sign & playField[7] === sign)
+        ||(playField[2] === sign & playField[5] === sign & playField[8] === sign)) {
+            console.log('winner');
+        }
+        else if ((playField[0] === sign & playField[4] === sign & playField[8] === sign)
+        ||(playField[2] === sign & playField[4] === sign & playField[6] === sign)) {
+            console.log('winner');
+        }
+    }
 
-    return { playField, populateArr, isWinner };
+    return { populateArr, isWinner };
 })();
 
 const displayController = (() => {
 
-    let lastSign = '';
+    let sign = 'x';
 
     cells.forEach(cell => cell.addEventListener('click', function () {
 
@@ -26,34 +42,31 @@ const displayController = (() => {
             return;
         }
 
-        if(lastSign === 'x'){
+        if(sign === '0'){
             let circle = document.createElement('img');
             circle.src = 'img/circle.png';
             circle.setAttribute('style', 'width: 100px; height: 100px;');
             gameBoard.populateArr(cells, cell, '0');
             cell.appendChild(circle);
-            lastSign = '0';
+            gameBoard.isWinner(sign);
+            sign = 'x';
         }
-        else if(lastSign === '0' || lastSign === ''){
+        else if(sign === 'x'){
             let cross = document.createElement('img');
             cross.src = 'img/cross.png';
             cross.setAttribute('style', 'width: 100px; height: 100px;');
             gameBoard.populateArr(cells, cell, 'x');
             cell.appendChild(cross);
-            lastSign = 'x';
+            gameBoard.isWinner(sign);
+            sign = '0';
         }
         
-
-        console.log(gameBoard.playField);
     }));
 
     return {}
 })();
 
 const player = (name) => {
-    const placeMark = () => { };
-    return {
-        placeMark,
-    }
+    
 }
 
