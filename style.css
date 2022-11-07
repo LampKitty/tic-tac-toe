@@ -5,12 +5,66 @@
 }
 
 body {
-    display: flex;
     height: 100vh;
     width: 100vw;
+    background-color:blanchedalmond;
+    display: flex;
     justify-content: center;
     align-items: center;
-    background-color:blanchedalmond;
+    flex-direction: column;
+}
+
+.player.hidden {
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+}
+
+.rename {
+    font-size: 72px;
+    max-width: 300px;
+    background-color: transparent;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    
+}
+
+.rename.visible {
+    visibility: visible;
+    width: 260px;
+    height: 64px;
+}
+
+.players {
+    font-family: 'Barlow', sans-serif;
+    font-size: 72px;
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+    margin-top: -100px;
+    line-height: 90%;
+    margin-bottom: 40px;
+}
+
+.player_cont {
+    display: flex;
+    max-width: 400px;
+}
+
+.player_cont button {
+    width: 32px;
+    height: 32px;
+    border: 2px solid black;
+    margin-top: auto;
+    margin-left: 10px;
+    background-image: url(img/rename.png);
+    background-size: contain;
+    background-color: transparent;
+}
+
+.players>.winner {
+    font-size: 96px;
 }
 
 .gameboard {

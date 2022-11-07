@@ -1,6 +1,5 @@
 const cells = document.querySelectorAll('.gameboard>div');
-
-
+const renameButtons = document.querySelectorAll('.rename_button');
 
 const gameBoard = (() => {
 
@@ -18,12 +17,14 @@ const gameBoard = (() => {
         ||(playField[6] === sign & playField[7] === sign & playField[8] === sign)) {
             console.log('winner');
         }
-        else if ((playField[0] === sign & playField[3] === sign & playField[6] === sign)
+        else if 
+        ((playField[0] === sign & playField[3] === sign & playField[6] === sign)
         ||(playField[1] === sign & playField[4] === sign & playField[7] === sign)
         ||(playField[2] === sign & playField[5] === sign & playField[8] === sign)) {
             console.log('winner');
         }
-        else if ((playField[0] === sign & playField[4] === sign & playField[8] === sign)
+        else if 
+        ((playField[0] === sign & playField[4] === sign & playField[8] === sign)
         ||(playField[2] === sign & playField[4] === sign & playField[6] === sign)) {
             console.log('winner');
         }
@@ -63,10 +64,17 @@ const displayController = (() => {
         
     }));
 
+    renameButtons.forEach(renameButton => 
+        renameButton.addEventListener('click', function() {
+            renameButton.previousElementSibling.classList.add('hidden'); 
+            renameButton.parentElement.firstElementChild.classList.add('visible');
+        }
+    ))
+
     return {}
 })();
 
-const player = (name) => {
-    
+const Player = (name) => {
+    return{name};
 }
 
