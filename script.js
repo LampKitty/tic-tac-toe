@@ -1,5 +1,14 @@
 const cells = document.querySelectorAll('.gameboard>div');
 const renameButtons = document.querySelectorAll('.rename_button');
+const winner = document.querySelector('.winner');
+const restartButton = document.querySelector('.restart_button');
+
+const Player = (name, sign, displayElement) => {
+    return { name, sign, displayElement };
+}
+
+let player1 = Player('Player 1', 'x');
+let player2 = Player('Player 2', '0');
 
 const gameBoard = (() => {
 
@@ -8,6 +17,7 @@ const gameBoard = (() => {
             '', '', '',
             '', '', '',];
 
+
     const populateArr = (cells, cell, sign) =>
         playField[Array.from(cells).indexOf(cell, 0)] = sign;
 
@@ -15,20 +25,47 @@ const gameBoard = (() => {
         if ((playField[0] === sign & playField[1] === sign & playField[2] === sign)
             || (playField[3] === sign & playField[4] === sign & playField[5] === sign)
             || (playField[6] === sign & playField[7] === sign & playField[8] === sign)) {
-            console.log('winner');
+            if (sign === player1.sign) {
+                winner.innerHTML = player1.displayElement.innerHTML + ' won!';
+                winner.classList.remove('hidden');
+            } else if (sign === player2.sign) {
+                winner.innerHTML = player2.displayElement.innerHTML + ' won!';
+                winner.classList.remove('hidden');
+            }
         }
         else if
             ((playField[0] === sign & playField[3] === sign & playField[6] === sign)
             || (playField[1] === sign & playField[4] === sign & playField[7] === sign)
             || (playField[2] === sign & playField[5] === sign & playField[8] === sign)) {
-            console.log('winner');
+            if (sign === player1.sign) {
+                winner.innerHTML = player1.displayElement.innerHTML + ' won!';
+                winner.classList.remove('hidden');
+            } else if (sign === player2.sign) {
+                winner.innerHTML = player2.displayElement.innerHTML + ' won!';
+                winner.classList.remove('hidden');
+            }
         }
         else if
             ((playField[0] === sign & playField[4] === sign & playField[8] === sign)
             || (playField[2] === sign & playField[4] === sign & playField[6] === sign)) {
-            console.log('winner');
+            if (sign === player1.sign) {
+                winner.innerHTML = player1.displayElement.innerHTML + ' won!';
+                winner.classList.remove('hidden');
+            } else if (sign === player2.sign) {
+                winner.innerHTML = player2.displayElement.innerHTML + ' won!';
+                winner.classList.remove('hidden');
+            }
         }
     }
+
+    restartButton.addEventListener('click', function () {
+        cells.forEach(cell => cell.innerHTML = '');
+        displayController.setSign();
+        winner.innerHTML = '';
+        for (i in playField) {
+            playField[i] = '';
+        }
+    });
 
     return { populateArr, isWinner };
 })();
@@ -36,6 +73,8 @@ const gameBoard = (() => {
 const displayController = (() => {
 
     let sign = 'x';
+
+    const setSign = () => sign = 'x';
 
     cells.forEach(cell => cell.addEventListener('click', function () {
 
@@ -71,10 +110,16 @@ const displayController = (() => {
         }
         ));
 
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         const renameInputs = document.querySelectorAll('.rename');
         renameInputs.forEach(renameInput => {
-            if(!renameInput.contains(event.target)) {
+            // reference player elements for later use
+            if (renameInput.nextElementSibling.innerHTML === 'Player 1') {
+                player1.displayElement = renameInput.nextElementSibling;
+            } else if (renameInput.nextElementSibling.innerHTML === 'Player 2') {
+                player2.displayElement = renameInput.nextElementSibling;
+            }
+            if (!renameInput.contains(event.target)) {
                 renameInput.classList.remove('visible');
                 renameInput.nextElementSibling.innerHTML = renameInput.value;
                 renameInput.nextElementSibling.classList.remove('hidden');
@@ -82,11 +127,9 @@ const displayController = (() => {
         })
     }, true);
 
-
-    return {}
+    return { setSign }
 })();
 
-const Player = (name) => {
-    return { name };
-}
+
+
 

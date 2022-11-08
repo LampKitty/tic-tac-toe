@@ -12,9 +12,11 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 40px;
+    font-family: 'Barlow', sans-serif;
 }
 
-.player.hidden {
+.hidden {
     width: 1px;
     height: 1px;
     visibility: hidden;
@@ -37,14 +39,12 @@ body {
 }
 
 .players {
-    font-family: 'Barlow', sans-serif;
     font-size: 72px;
     display: flex;
     justify-content: space-around;
     width: 100vw;
     margin-top: -100px;
     line-height: 90%;
-    margin-bottom: 40px;
 }
 
 .player_cont {
@@ -82,4 +82,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.restart_button {
+    background-color: transparent;
+    border: 1px solid black;
+    height: 80px;
+    width: 130px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 70px;
+}
+
+.restart_button:hover {
+    background-color: black;
+    color: blanchedalmond;
 }
